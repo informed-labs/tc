@@ -1,0 +1,12 @@
+{
+  "my_weekly_task": {
+    "cron": "10 20 ? * SAT *",
+    "target": "arn:aws:states:{{region}}:{{account}}:stateMachine:my-stepfn",
+    "payload": {
+      "account": "{{account}}",
+      "region": "{{region}}",
+      "target": "nightly",
+      "job_id": "nightly",
+    }
+  }
+}

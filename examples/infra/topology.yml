@@ -1,0 +1,2 @@
+name: infra-test
+infra: ./infra

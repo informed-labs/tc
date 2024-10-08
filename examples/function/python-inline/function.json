@@ -1,0 +1,14 @@
+{
+  "name": "python-inline",
+  "description": "bar",
+  "runtime": {
+    "lang": "python3.10",
+    "package_type": "zip",
+    "handler": "handler.handler",
+    "layers": []
+  },
+  "tasks": {
+    "build": "inline-deps",
+    "clean": "rm *.zip"
+  }
+}
