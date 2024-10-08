@@ -1,7 +1,28 @@
 # tc
-Contextual, serverless deployer and workflow tool
+Contextual, serverless workflow tool
 
-__Placeholder until we migrate the code from the original private repository__
+Note: This project is in active development.
 
-Expect to have it by September 22, 2024
-(Taking us a bit longer than expected to cleanup the private repo in order to move it to this public repo)
+Documentation: [https://informed-labs.github.io/tc/](https://informed-labs.github.io/tc/)
+
+```sh
+Usage: tc <COMMAND>
+
+Commands:
+  bootstrap  Bootstrap IAM roles, extensions etc
+  build      Build layers, extensions and pack function code
+  compile    Compile a Topology
+  create     Create a sandboxed topology
+  delete     Delete a sandboxed topology
+  emulate    Emulate Runtime environments
+  invoke     Invoke a topology synchronously or asynchronously
+  list       List created entities
+  publish    Pulish layers, slabs and assets
+  resolve    Resolve a topology from functions, events, states description
+  scaffold   Scaffold roles and infra vars
+  test       Run unit tests for functions in the topology dir
+  update     Update components
+  upgrade    upgrade tc version
+  version    display current tc version
+  help       Print this message or the help of the given subcommand(s)
+```
