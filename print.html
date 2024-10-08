@@ -92,7 +92,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">Preamble</li><li class="chapter-item "><a href="about.html">About</a></li><li class="chapter-item "><a href="installation.html">Installation</a></li><li class="chapter-item affix "><li class="part-title">Examples</li><li class="chapter-item "><a href="examples/etl.html">ETL</a></li><li class="chapter-item "><a href="examples/job-tracker.html">Job Tracker</a></li><li class="chapter-item affix "><li class="part-title">Modules</li><li class="chapter-item "><a href="modules/compiler.html">Compiler</a></li><li class="chapter-item "><a href="modules/resolver.html">Resolver</a></li><li class="chapter-item "><a href="modules/builder.html">Builder</a></li><li class="chapter-item "><a href="modules/publisher.html">Publisher</a></li><li class="chapter-item "><a href="modules/deployer.html">Deployer</a></li><li class="chapter-item "><a href="modules/differ.html">Differ</a></li><li class="chapter-item "><a href="modules/emulator.html">Emulator</a></li><li class="chapter-item "><a href="modules/invoker.html">Invoker</a></li><li class="chapter-item "><a href="modules/releaser.html">Releaser</a></li><li class="chapter-item affix "><li class="part-title">Reference</li><li class="chapter-item "><a href="reference/specification.html">Specification</a></li><li class="chapter-item "><a href="reference/components.html">Components</a></li><li class="chapter-item "><a href="reference/commands.html">Commands</a></li><li class="chapter-item "><a href="reference/config.html">Config</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">Preamble</li><li class="chapter-item "><a href="about.html">About</a></li><li class="chapter-item "><a href="installation.html">Installation</a></li><li class="chapter-item "><a href="started.html">Getting Started</a></li><li class="chapter-item affix "><li class="part-title">Examples</li><li class="chapter-item "><a href="examples/etl.html">ETL</a></li><li class="chapter-item "><a href="examples/job-tracker.html">Job Tracker</a></li><li class="chapter-item affix "><li class="part-title">Modules</li><li class="chapter-item "><a href="modules/compiler.html">Compiler</a></li><li class="chapter-item "><a href="modules/resolver.html">Resolver</a></li><li class="chapter-item "><a href="modules/builder.html">Builder</a></li><li class="chapter-item "><a href="modules/publisher.html">Publisher</a></li><li class="chapter-item "><a href="modules/deployer.html">Deployer</a></li><li class="chapter-item "><a href="modules/emulator.html">Emulator</a></li><li class="chapter-item "><a href="modules/invoker.html">Invoker</a></li><li class="chapter-item affix "><li class="part-title">Reference</li><li class="chapter-item "><a href="reference/specification.html">Specification</a></li><li class="chapter-item "><a href="reference/components.html">Components</a></li><li class="chapter-item "><a href="reference/config.html">Config</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -246,6 +246,7 @@ cargo build --release
 sudo mv target/release/tc /usr/local/bin/tc
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started-1"><a class="header" href="#getting-started-1">Getting Started</a></h1>
 <p><code>tc</code> is a tool to build, compose, interactively develop and deploy serverless components. The following is an example of developing and creating a basic topology to enhance, transform and load data.</p>
 <p>A Basic Example: ETL</p>
 <p>Let's call the topology <code>etl</code>. Our requirements are (I'm just making this up):</p>
@@ -533,9 +534,6 @@ tc diff --changelog
 <p>wip - a frontend app</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="compiler"><a class="header" href="#compiler">Compiler</a></h1>
 <p>At the core of <code>tc</code> is the compiler. The <code>compiler</code></p>
-<ul>
-<li>compi</li>
-</ul>
 <pre><code>tc compile -c topologies
 
 tc compile -c vars
@@ -557,15 +555,13 @@ tc compile -c vars
 <li>The function specification capture enough metadata on how and what to build</li>
 </ul>
 <p>Usage:</p>
-<pre><code>tc build [--kind &lt;deps|extension|artifacts&gt;] --env &lt;env&gt;
+<pre><code>tc build [--kind &lt;deps|extension|model&gt;] --env &lt;env&gt;
 
 tc build OPTIONS
 Options:
-  -e, --env &lt;ENV&gt;
       --trace
       --kind &lt;KIND&gt;
       --pack
-	  --dry-run
   -n, --name &lt;NAME or PATH&gt;
 </code></pre>
 <h2 id="building-dependencies"><a class="header" href="#building-dependencies">Building Dependencies</a></h2>
@@ -734,32 +730,7 @@ tc create [--sandbox SANDBOX] [-e ENV]
 <div>
 <p>Note that update works on unfrozen sandboxes. Most stable sandboxes are immutable and thus update is disabled for those. To mutate, unfreeze it.</p>
 </div>
-</div><div style="break-before: page; page-break-before: always;"></div><h1 id="differ"><a class="header" href="#differ">Differ</a></h1>
-<h3 id="code-diffs"><a class="header" href="#code-diffs">Code diffs</a></h3>
-<p>To diff between what is locally in your current directory (function) and remote lambda in a sandbox</p>
-<pre><code>tc diff -s &lt;sandbox&gt; -e &lt;env&gt;
-
-</code></pre>
-<p><img src="modules//images/diff.png" alt="Diff" /></p>
-<h3 id="changelog"><a class="header" href="#changelog">Changelog</a></h3>
-<pre><code>cd services/extraction/dealer
-tc diff --changelog
-
-
-[QA-1200] Fixed quotes for the suffix conditional statement (#5258)
-
-0.26.0
-[STP-3166] Add all Credit Union Names to lender name extractions (#5212)
-[QA-1186] [QA] For bookout sheet incorrect key used for clean_trade_in_price (#5198)
-[STP-3179] handle serialize-via-cp Lambda.ServiceException (#5178)
-(#5172)
-
-0.25.0
-[STP-3064] Add support for new bookout_sheet extraction keys and integrate ML model for all existing fields as well. (#5139)
-[STP-3165] FinbeUSA lender name (#5115)
-Add extracted_data_uri in serializer output always (#5112)
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="emulator"><a class="header" href="#emulator">Emulator</a></h1>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="emulator"><a class="header" href="#emulator">Emulator</a></h1>
 <ul>
 <li><a href="modules/emulator.html#lambdas">Lambdas</a></li>
 <li><a href="modules/emulator.html#stepfunctions">Stepfunctions</a></li>
@@ -823,122 +794,6 @@ tc invoke --kind event -e dev --payload '{&quot;data&quot;...}'
 <p>To interactively execute a stepfunction</p>
 <pre><code>tc invoke -e dev -s sandbox --interactive
 functor@sandbox.dev&gt; next
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="releaser"><a class="header" href="#releaser">Releaser</a></h1>
-<ul>
-<li><a href="modules/releaser.html#a-simple-release-workflow">A simple Release workflow</a></li>
-<li><a href="modules/releaser.html#git-tagging">Git tagging</a></li>
-<li><a href="modules/releaser.html#changelog">Changelog</a>
-<ul>
-<li><a href="modules/releaser.html#annotation-based-changelog">Annotation-based changelog</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="a-simple-release-workflow"><a class="header" href="#a-simple-release-workflow">A simple Release workflow</a></h2>
-<p>The following is a simple release workflow:</p>
-<ol>
-<li>
-<p>A PR merge creates a <code>Patch Release</code> (example 0.1.1, 0.1.2 so forth)</p>
-</li>
-<li>
-<p>An explicit release using the following command creates a <code>Minor Release</code> (example 0.2.0)</p>
-<pre><code class="language-sh">tc release --service extraction
-</code></pre>
-<p>This triggers CI to create an annotated tag. An <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">annotated tag</a> is different from a lightweight or commit tag.</p>
-</li>
-<li>
-<p>This stable <code>Minor Release</code> can be deployed to other environments and sandboxes</p>
-<pre><code class="language-sh">tc deploy --service extraction-dealer --version 0.2.0 --sandbox stable --env qa
-</code></pre>
-</li>
-</ol>
-<div id="admonition-info" class="admonition admonish-info" role="note" aria-labelledby="admonition-info-title">
-<div class="admonition-title">
-<div id="admonition-info-title">
-<p>Info</p>
-</div>
-<a class="admonition-anchor-link" href="modules/releaser.html#admonition-info"></a>
-</div>
-<div>
-<p>Minor releases are annotated git tags. They are not generated via a commit, but are annotations on the last known good patch release.</p>
-</div>
-</div>
-<h2 id="git-tagging"><a class="header" href="#git-tagging">Git tagging</a></h2>
-<pre><code>Options:
-  -n, --next &lt;NEXT&gt;
-  -s, --service &lt;SERVICE&gt;
-      --dry-run
-      --push
-  -S, --suffix &lt;SUFFIX&gt;
-</code></pre>
-<p>To create next patch version:</p>
-<pre><code class="language-sh">cd services/extraction/dealer
-tc tag --next patch --service extraction-dealer [--dry-run]
-
-Tag { prefix: &quot;extraction&quot;, parent: &quot;0.1.8&quot;, create: true, version: &quot;0.1.9&quot; }
-</code></pre>
-<p>To create a minor release from a latest rc tag</p>
-<pre><code class="language-sh">tc release --next minor --service extraction --dry-run
-Tag { prefix: &quot;extraction&quot;, parent: &quot;0.1.8&quot;, create: true, version: &quot;0.2.0&quot; }
-</code></pre>
-<div id="admonition-info-1" class="admonition admonish-info" role="note" aria-labelledby="admonition-info-1-title">
-<div class="admonition-title">
-<div id="admonition-info-1-title">
-<p>Info</p>
-</div>
-<a class="admonition-anchor-link" href="modules/releaser.html#admonition-info-1"></a>
-</div>
-<div>
-<p>A topology or service is typically tagged in github. Nano functions don't have a git tag, instead are part of the manifest with revisions or git-less semvers</p>
-</div>
-</div>
-<h2 id="changelog-1"><a class="header" href="#changelog-1">Changelog</a></h2>
-<h3 id="annotation-based-changelog"><a class="header" href="#annotation-based-changelog">Annotation-based changelog</a></h3>
-<p>tc leverages annotation tags to get accurate changes and diffs between two stable releases.</p>
-<pre><code>tc changelog --service extraction-dealer
-[Infra] Feature/extraction fallback output (#2985)
-[STP-2732] [Mountain CU POC Env] Bring lender name extractions back to benchmark by adding them to the extraction context (#2977)
-[STP-2728] [CUDirect] Clean Retail Price Extraction Precision Issues (#2942)
-
-0.7.0
-[QA] RISC incorrect dealer address extracted and verification failing (#2960)
-
-0.6.0
-[QA-895] Fixed applicant 2 address bug (#2953)
-
-0.5.0
-[STP-2733][CUDirect POC Env] Lender name being extracted incorrectly from Oregon Title Apps (#2943)
-[STP] Undo provider address and phone number extraction (#2938)
-[STP-2709] Address extraction improvements for Y12 credit app format (#2944)
-[LIV-1280] Assigned without recourse extraction is stricter (#2929)
-[LIV-1310][LIV-1316] [LIV-1312] LIVOPS fixes (#2930)
-support AP for mastery (#2876)
-[QA-873] Dealer address is not being used in the verification (#2845)
-</code></pre>
-<p><code>-v</code> shows each semver patch</p>
-<p>To find the changelog between two versions (including annotated):</p>
-<pre><code class="language-sh">tc changelog --between 0.2.2..0.3.0
-
-tc changelog --between 0.2.2-qa..0.2.10-qa
-</code></pre>
-<p>To find the revisions of all components in the service:</p>
-<pre><code class="language-sh">tc changelog -t --service extraction-dealer
-document-extraction
- - revision: fdc1d48
- - lang: ruby2.7
- - layers:
- document-extraction-0
- document-extraction-1
- native
-fallback
- - revision: fdc1d48
- - lang: python3.10
- - layers:
- python-lambda-base
-field-grouper
- - revision: fdc1d48
- - lang: python3.10
-field-mapper
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="specification"><a class="header" href="#specification">Specification</a></h1>
 <ul>
@@ -1079,93 +934,6 @@ tc deploy -e dev --sandbox main --module vars
 <p>tc deploy, without any module argument will deploy vars modules and resolve the values in the config</p>
 </div>
 </div>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="command-reference"><a class="header" href="#command-reference">Command Reference</a></h1>
-<ul>
-<li><a href="reference/commands.html#contextual-commands">Contextual Commands</a>
-<ul>
-<li><a href="reference/commands.html#compose">compose</a></li>
-<li><a href="reference/commands.html#build">build</a></li>
-<li><a href="reference/commands.html#create">create</a></li>
-<li><a href="reference/commands.html#update">update</a></li>
-<li><a href="reference/commands.html#delete">delete</a></li>
-</ul>
-</li>
-</ul>
-<p><code>Contextual</code> commands need to be run from the functor or service directory. The directory structure holds the required state. <code>Workflow</code> commands can be run anywhere and neither require the techno-core repo nor any local state.</p>
-<p>Below is a table showing equivalent workflow and contextual commands. Contextual commands are typically used during dev and in CI.</p>
-<div class="table-wrapper"><table><thead><tr><th>Workflow</th><th>Contextual</th></tr></thead><tbody>
-<tr><td></td><td>build</td></tr>
-<tr><td>manifest</td><td>compose</td></tr>
-<tr><td>deploy</td><td>create</td></tr>
-<tr><td>release</td><td>tag</td></tr>
-<tr><td>diff</td><td>changelog</td></tr>
-<tr><td>invoke</td><td>test</td></tr>
-<tr><td>stash</td><td></td></tr>
-<tr><td>route</td><td></td></tr>
-</tbody></table>
-</div>
-<h2 id="contextual-commands"><a class="header" href="#contextual-commands">Contextual Commands</a></h2>
-<h3 id="compose"><a class="header" href="#compose">compose</a></h3>
-<p><code>compose</code> generates a self-contained description of the topology.</p>
-<pre><code>Options:
-  -d, --dir &lt;DIR&gt;
-  -e, --env &lt;ENV&gt;
-  -s, --sandbox &lt;SANDBOX&gt;
-  -c, --component &lt;COMPONENT&gt;
-</code></pre>
-<pre><code class="language-sh">cd services/extraction/dealer
-tc compose -s test -e dev-af
-</code></pre>
-<h3 id="build"><a class="header" href="#build">build</a></h3>
-<p><code>tc</code> optimizes the build process to decrease deploy time by reducing the aritifact size. For example, deploying the entire <code>extraction</code> topology takes less than 10s on a decent network.</p>
-<ol>
-<li>Dependencies (in Gemfile, Pip or Poetry) are built as layers  (optional)</li>
-<li>The code is <code>packed</code> and thus the deploys are significantly faster</li>
-</ol>
-<pre><code class="language-sh">cd services/extraction
-tc build
-</code></pre>
-<p>The above command zips all the functions and renders the stepfn state-machine, events and routes (if any).</p>
-<p>To build layers manually:</p>
-<pre><code class="language-sh">cd services/extraction/vision_page_process
-tc build --layers
-tc update -c layers
-</code></pre>
-<p><code>tc deploy -c layers</code> creates a layer with the same name as the function name. So make sure to add the layer in <code>function.json -&gt; runtime -&gt; layers</code> section</p>
-<h3 id="create"><a class="header" href="#create">create</a></h3>
-<p>Create a sandboxed topology or functor</p>
-<pre><code>Options:
-  -d, --dir &lt;DIR&gt;
-  -e, --env &lt;ENV&gt;
-  -s, --sandbox &lt;SANDBOX&gt;
-  -m, --mode &lt;express|standard&gt;
-      --notify
-  -h, --help
-
-</code></pre>
-<pre><code>tc create -e dev --sandbox test
-2023-08-01T21:21:53.820 Initializing env dev for test
-2023-08-01T21:21:55.438 Creating logf (924 B)
-2023-08-01T21:21:55.844 Creating aggregator log-group /aws/states/my_logs
-2023-08-01T21:21:57.212 Enabling stepfn logging
-2023-08-01T21:21:58.623 Adding permission to filter
-2023-08-01T21:21:59.985 Creating subscription filter test { $.type = &quot;TaskStateEntered&quot;  ||  $.type = &quot;TaskFailed&quot; }
-</code></pre>
-<h3 id="update"><a class="header" href="#update">update</a></h3>
-<pre><code>Options:
-  -d, --dir &lt;DIR&gt;
-  -e, --env &lt;ENV&gt;
-  -s, --sandbox &lt;SANDBOX&gt;
-  -c, --component &lt;COMPONENT&gt;
-  -l, --link &lt;LINK&gt;
-  -a, --asset &lt;ASSET&gt;
-</code></pre>
-<h3 id="delete"><a class="header" href="#delete">delete</a></h3>
-<p>To delete a sandbox:</p>
-<pre><code>cd service/my-service
-tc delete --sandbox test --env dev
-</code></pre>
-<pre><code></code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="config"><a class="header" href="#config">Config</a></h1>
 <p><code>tc</code> uses special environment variables as feature bits and config overrides. The following is the list of TC environment variables:</p>
 <p><strong>TC_DIR</strong></p>

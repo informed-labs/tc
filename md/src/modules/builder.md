@@ -11,15 +11,13 @@ Design principles:
 Usage:
 
 ```
-tc build [--kind <deps|extension|artifacts>] --env <env>
+tc build [--kind <deps|extension|model>] --env <env>
 
 tc build OPTIONS
 Options:
-  -e, --env <ENV>
       --trace
       --kind <KIND>
       --pack
-	  --dry-run
   -n, --name <NAME or PATH>
 ```
 

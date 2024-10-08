@@ -2,7 +2,6 @@
 
 At the core of `tc` is the compiler. The `compiler`
 
-- compi
 
 ```
 tc compile -c topologies
